@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/gin-gonic/gin"
+	"github.com/kamogelosekhukhune777/ecom-cart/database"
 	"github.com/kamogelosekhukhune777/ecom-cart/routes"
 )
 
