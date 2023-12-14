@@ -5,7 +5,7 @@ import (
 	"github.com/kamogelosekhukhune777/ecom-cart/controllers"
 )
 
-func userRoutes(incomingRoutes *gin.Engine) {
+func UserRoutes(incomingRoutes *gin.Engine) {
 	incomingRoutes.POST("user/signup", controllers.SignUp())
 	incomingRoutes.POST("users/login", controllers.Login())
 	incomingRoutes.POST("admin/addproduct", controllers.ProductViewAdmin())

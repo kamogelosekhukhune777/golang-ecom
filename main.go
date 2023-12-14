@@ -1,6 +1,12 @@
 package main
 
-import "os"
+import (
+	"log"
+	"os"
+
+	"github.com/gin-gonic/gin"
+	"github.com/kamogelosekhukhune777/ecom-cart/routes"
+)
 
 func main() {
 	port := os.Getenv("PORT")
@@ -8,5 +14,18 @@ func main() {
 		port = "8080"
 	}
 
-	app := contollers.NewApplication(database.Product)
+	app := contollers.NewApplication(database.ProductData(database.Client, "products"), database.UserData(database.Client, "users"))
+
+	router := gin.New()
+	router.Use(gin.Logger())
+
+	routes.UserRoutes(router)
+	router.Use(middleware.Authentication())
+
+	router.GET("/addttocart", app.AddToCart())
+	router.GET("/removeitem", app.RemoveItem())
+	router.GET("/cartcheckout", app.BuyFromCart())
+	router.GET("/instantbuy", app.InstantBuy())
+
+	log.Fatal(router.Run(":" + port))
 }
